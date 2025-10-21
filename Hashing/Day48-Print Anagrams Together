@@ -1,0 +1,14 @@
+class Solution {
+    public ArrayList<ArrayList<String>> anagrams(String[] arr) {
+        // code here
+        Map<String,ArrayList<String>> map = new HashMap<>();
+        for(String s : arr){
+            char[] chars = s.toCharArray();
+            Arrays.sort(chars);
+            String sort = new String(chars);
+            map.computeIfAbsent(sort,k -> new ArrayList<>()).add(s);
+        }
+        ArrayList<ArrayList<String>> result = new ArrayList<>(map.values());
+        return result;
+    }
+}

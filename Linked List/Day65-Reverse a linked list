@@ -1,1 +1,25 @@
-file
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}
+*/
+
+class Solution {
+    Node reverseList(Node head) {
+        // code here
+        Node prev=null;
+        while(head != null){
+            Node next =head.next;
+            head.next=prev;
+            prev=head;
+            head=next;
+        }
+        return prev;
+    }
+}

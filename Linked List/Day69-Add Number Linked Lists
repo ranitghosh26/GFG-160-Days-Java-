@@ -1,0 +1,104 @@
+/*
+class Node {
+    int data;
+    Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+*/
+
+// class Solution {
+//     // Function to reverse a linked list
+//     private Node reverse(Node head){
+//         Node prev = null;
+//         Node curr = head;
+//         Node next = null;
+        
+//         while(curr != null){
+//             next = curr.next;
+//             curr.next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         return prev;
+//     }
+//     public Node addTwoLists(Node head1, Node head2) {
+        
+//         head1 = reverse(head1);
+//         head2 = reverse(head2);
+//         // code here
+//         Node result = null;
+//         Node temp = null;
+//         int carry = 0;
+        
+//         while(head1 != null || head2 != null || carry != 0){
+//             int sum = carry;
+//             if(head1 != null){
+//                 sum += head1.data;
+//                 head1 = head1.next;
+//             }
+//             if(head2 != null){
+//                 sum += head2.data;
+//                 head2 = head2.next;
+//             }
+            
+//             carry = sum/10;
+//             int digit = sum%10;
+            
+//             Node newNode = new Node(digit);
+//             newNode.next = result;
+//             result = newNode;
+//         }
+        
+//         return result;
+        
+//     }
+// }
+
+
+class Solution{
+    static Node addTwoLists(Node num1, Node num2){
+        Node l1 = reverseList(num1);
+        Node l2 = reverseList(num2);
+        Node curr = null;
+        int carry = 0;
+        
+        while(l1 != null || l2 != null || carry > 0){
+            int v1 = (l1 != null) ? l1.data : 0;
+            int v2 = (l2 != null) ? l2.data : 0;
+            
+            int sum = v1 + v2 + carry;
+            carry = sum/10;
+            
+            Node tmp = new Node(sum % 10);
+            tmp.next = curr;
+            curr = tmp;
+            
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null)  l2 = l2.next;
+        }
+        while(curr != null && curr.data == 0 && curr.next != null){
+            curr = curr.next;
+        }
+        return curr;
+    }
+    static Node reverseList(Node head){
+        // code here
+        Node tmpHead = null;
+        while(head != null){
+            Node nex = head.next;
+            if(tmpHead == null){
+                tmpHead = head;
+                tmpHead.next = null;
+            } else {
+                head.next = tmpHead;
+                tmpHead = head;
+            }
+            head = nex;
+        }
+        return tmpHead;
+    }
+}
